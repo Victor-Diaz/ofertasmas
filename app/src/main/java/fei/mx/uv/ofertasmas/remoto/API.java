@@ -2,6 +2,15 @@ package fei.mx.uv.ofertasmas.remoto;
 
 import android.content.Context;
 import java.util.concurrent.TimeUnit;
+
+import fei.mx.uv.ofertasmas.model.Categoria;
+import fei.mx.uv.ofertasmas.model.Ciudad;
+import fei.mx.uv.ofertasmas.model.Cupon;
+import fei.mx.uv.ofertasmas.model.Empresa;
+import fei.mx.uv.ofertasmas.model.Estado;
+import fei.mx.uv.ofertasmas.model.Oferta;
+import fei.mx.uv.ofertasmas.model.RCategoriaOferta;
+import fei.mx.uv.ofertasmas.model.ROfertaCiudad;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -12,7 +21,30 @@ import retrofit2.http.GET;
 public interface API {
 
     String BASE_URL = "http://192.168.1.64:9000/";
+
+    @GET("api/Categorias")
+    Call<Categoria> getCategorias();
+
+    @GET("api/Ciudades")
+    Call<Ciudad> getCiudades();
+
+    @GET("api/Cupones")
+    Call<Cupon> getCupones();
+
+    @GET("api/Empresas")
+    Call<Empresa> getEmpresas();
+
     @GET("api/estados")
+    Call<Estado> getEstados();
+
+    @GET("api/Ofertas")
+    Call<Oferta> getOfertas();
+
+    @GET("api/rCategoriaOfertas")
+    Call<RCategoriaOferta> getRCategoriaOfertas();
+
+    @GET("api/rOfertaCiudades")
+    Call<ROfertaCiudad> getROfertaCiudad();
 
     class Factory {
         private static API service;
