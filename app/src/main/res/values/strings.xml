@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">OfertasMas</string>
+    <string name="title_activity_login">Inicio de sesión OfertasMas</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Correo electrónico</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Iniciar sesión</string>
+    <string name="action_sign_in_short">Inicio de sesión OfertasMas</string>
+    <string name="error_invalid_email">Correo electrónico con formato invalido</string>
+    <string name="error_invalid_password">Contraseña es muy corta</string>
+    <string name="error_incorrect_password">Contraseña incorrecta, verifica</string>
+    <string name="error_field_required">Debes ingresar correo electrónico</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+</resources>
