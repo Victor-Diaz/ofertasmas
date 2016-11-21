@@ -11,7 +11,8 @@ import retrofit2.http.GET;
 
 public interface API {
 
-    String BASE_URL = "http://192.168.1.64";
+    String BASE_URL = "http://192.168.1.64:9000/";
+    @GET("api/estados")
 
     class Factory {
         private static API service;
@@ -38,4 +39,6 @@ public interface API {
             }
         }
     }
+
+
 }
