@@ -8,6 +8,15 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.List;
+
+import fei.mx.uv.ofertasmas.model.Estado;
+import fei.mx.uv.ofertasmas.remoto.API;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private String estado;//Valor seleccionado del arreglo
@@ -46,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         //Asignar el adaptador al spinner
         spinner.setAdapter(dataAdapter);//estados
         spinner2.setAdapter(dataAdapter2);//ciudades
+
     }
 
     //metodo para boton
@@ -95,4 +105,5 @@ public class MainActivity extends AppCompatActivity {
         //intent.putExtra("val_materia",materia);
         startActivity(intent);
     }
+
 }
