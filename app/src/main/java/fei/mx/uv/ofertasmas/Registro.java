@@ -1,11 +1,23 @@
 package fei.mx.uv.ofertasmas;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import fei.mx.uv.ofertasmas.model.Mensaje;
+import fei.mx.uv.ofertasmas.remoto.API;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Registro extends AppCompatActivity {
     private String correo;
@@ -14,67 +26,59 @@ public class Registro extends AppCompatActivity {
     private String contrasena;
     private String contrasenaverificar;
 
+    private EditText edt_correo;//este es el uno
+    private EditText edt_telefono;
+    private EditText edt_usuario;
+    private EditText edt_contrasena;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        edt_correo = (EditText) findViewById(R.id.edt_correo);
+        edt_telefono = (EditText) findViewById(R.id.edt_telefono);
+        edt_usuario = (EditText) findViewById(R.id.edt_usuarrio);
+        edt_contrasena = (EditText) findViewById(R.id.edt_contrasena);
     }
 
     //Mètodo para el adaptador
-    public void onClick (View v){
+    public void registrar (View v){
         int contador_campos=0;//saber el numero de campos que estàn llenos
         //Obtener los objetos de tipo EditText
         //spn_ciudad es una variable que obtiene los objetos de tipo spinner realizados anteriormente
-        EditText editText = (EditText) findViewById(R.id.editText);//este es el uno
-        EditText editText2 = (EditText) findViewById(R.id.editText2);
-        EditText editText3 = (EditText) findViewById(R.id.editText3);
-        EditText editText4 = (EditText) findViewById(R.id.editText4);
-        EditText editText5 = (EditText) findViewById(R.id.editText5);
+
 
         //esto se hace para poder validar que no exista un campo vacio
-        if (!(editText.getText() != null &&  !editText.getText().toString().isEmpty())){
-            editText.setError("Debes ingresar correo electrónico.");
+        if (!(edt_correo.getText() != null &&  !edt_correo.getText().toString().isEmpty())){
+            edt_correo.setError("Debes ingresar correo electrónico.");
         }else{
-            correo = editText.getText().toString();//cachar el correo obtenido del campo
+            correo = edt_correo.getText().toString();//cachar el correo obtenido del campo
             contador_campos += 1;
         }
-        if (!(editText2.getText() != null && !editText2.getText().toString().isEmpty())){
-            editText2.setError("Debes ingresar número telefonico.");
+        if (!(edt_telefono.getText() != null && !edt_telefono.getText().toString().isEmpty())){
+            edt_telefono.setError("Debes ingresar número telefonico.");
         }else {
-            telefono = editText2.getText().toString();
+            telefono = edt_telefono.getText().toString();
             contador_campos = contador_campos + 1;//otra forma de sumar
         }
-        if (!(editText3.getText() != null && !editText3.getText().toString().isEmpty())){
-            editText3.setError("Debes ingresar nombre de usuario.");
+        if (!(edt_usuario.getText() != null && !edt_usuario.getText().toString().isEmpty())){
+            edt_usuario.setError("Debes ingresar nombre de usuario.");
         }else {
-            usuario = editText3.getText().toString();
+            usuario = edt_usuario.getText().toString();
             contador_campos += 1;//otra forma de sumar
         }
-        if (!(editText4.getText() != null && !editText4.getText().toString().isEmpty())){
-            editText4.setError("Debes ingresar una contraseña.");
+        if (!(edt_contrasena.getText() != null && !edt_contrasena.getText().toString().isEmpty())){
+            edt_contrasena.setError("Debes ingresar una contraseña.");
         }else {
-            contrasena = editText4.getText().toString();
+            contrasena = edt_contrasena.getText().toString();
             contador_campos += 1;//otra forma de sumar
-        }
-        if (!(editText5.getText() != null && !editText5.getText().toString().isEmpty())){
-            editText5.setError("Debes verificar la contraseña.");
-        }else {
-            //if(editText4.getText()==editText5.getText()){//pregunta si la contraseña es la misma
-                contrasenaverificar = editText5.getText().toString();
-                contador_campos += 1;//otra forma de sumar
-        }
-        //QUERIA VALIDAR LA MISMA CONTRASEÑA PERO CREO NO LO HACE
-        if (!(editText4.getText() != editText5.getText())){
-            editText5.setError("Debes ingresar la misma contraseña");
-        }else{
-            contrasena=contrasenaverificar;
         }
         //Mostrar dialogo de informaciòn
-        if (contador_campos==5) {
+        if (contador_campos==4) {
             AlertDialog dialogo = new AlertDialog.Builder(Registro.this).create();
             dialogo.setTitle("Valores ingresados...");
             dialogo.setMessage(String.format("Los valores ingresados son \n" +
-                            "Correo: %s\nTeléfonon: %s\nUsuario: %s\nUna contrsaña" +
+                            "Correo: %s\nTeléfonon: %s\nUsuario: %s\nUna contrasaña" +
                             " \n\n¿Deseas continuar?",
                     correo,
                     telefono,
@@ -84,7 +88,7 @@ public class Registro extends AppCompatActivity {
                     "Aceptar",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                           // llamarASegundaActividad();
+                           registrarUsuario();
                         }
                     });
 
@@ -97,5 +101,47 @@ public class Registro extends AppCompatActivity {
                     });
             dialogo.show();
         }
+    }
+
+    public void registrarUsuario(){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("correoUsuario", edt_correo.getText().toString());
+            object.put("nombreUsuario", edt_usuario.getText().toString());
+            object.put("contrasenaUsuario", edt_contrasena.getText().toString());
+            object.put("celularUsuario", edt_telefono.getText().toString());
+        }catch (JSONException ex){
+            ex.printStackTrace();
+        }
+
+
+        RequestBody body = RequestBody
+                .create(okhttp3.MediaType.parse("application/json; charset=utf-8"),
+                        (new JSONObject()).toString());
+        Call<Mensaje> call = API.Factory.getIstance(Registro.this).registrarUsuario(body);
+        call.enqueue(new Callback<Mensaje>() {
+            @Override
+            public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {
+                if (!response.body().error) {
+                    Toast.makeText(Registro.this,
+                            response.body().mensaje,
+                            Toast.LENGTH_LONG)
+                            .show();
+                } else {
+                    Toast.makeText(Registro.this,
+                            response.body().mensaje,
+                            Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Mensaje> call, Throwable t) {
+                Toast.makeText(Registro.this,
+                        t.getMessage(),
+                        Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
     }
 }

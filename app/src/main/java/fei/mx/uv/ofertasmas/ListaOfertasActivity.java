@@ -48,6 +48,9 @@ public class ListaOfertasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_ofertas);
 
+        Intent intent = new Intent(this, Registro.class);
+        startActivity(intent);
+
         //llenar el spinner a traves del arreglo
         Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
         //Crear adaptador para el spinner

@@ -10,19 +10,24 @@ import fei.mx.uv.ofertasmas.model.Ciudad;
 import fei.mx.uv.ofertasmas.model.Cupon;
 import fei.mx.uv.ofertasmas.model.Empresa;
 import fei.mx.uv.ofertasmas.model.Estado;
+import fei.mx.uv.ofertasmas.model.Mensaje;
 import fei.mx.uv.ofertasmas.model.Oferta;
 import fei.mx.uv.ofertasmas.model.RCategoriaOferta;
 import fei.mx.uv.ofertasmas.model.ROfertaCiudad;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface API {
 
-    String BASE_URL = "http://192.168.1.64:9000/";
+    String BASE_URL = "http://104.130.23.86:9000/";
 
     @GET("api/Categorias")
     Call<List<Categoria>> getCategorias();
@@ -47,6 +52,9 @@ public interface API {
 
     @GET("api/rOfertaCiudades")
     Call<ROfertaCiudad> getROfertaCiudad();
+
+    @POST("api/usuario")
+    Call<Mensaje> registrarUsuario(@Body RequestBody usuario);
 
     class Factory {
         private static API service;
