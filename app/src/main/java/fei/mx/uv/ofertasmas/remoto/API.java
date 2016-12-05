@@ -48,6 +48,8 @@ public interface API {
     @GET("api/rOfertaCiudades")
     Call<ROfertaCiudad> getROfertaCiudad();
 
+
+
     class Factory {
         private static API service;
 
