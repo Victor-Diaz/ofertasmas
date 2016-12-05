@@ -12,6 +12,7 @@ public class ListaOfertasActivity extends AppCompatActivity {
     }
 } */
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -94,7 +95,7 @@ public class ListaOfertasActivity extends AppCompatActivity {
         dialogo.show();
     }
 
-    private void crearDialogoEstados() {
+    private void crearDialogoEstados(){
         Call<List<Estado>> call = API.Factory.getIstance(ListaOfertasActivity.this).getEstados();
         call.enqueue(new Callback<List<Estado>>() {
             @Override
@@ -103,6 +104,7 @@ public class ListaOfertasActivity extends AppCompatActivity {
                 for (int i = 0; i < response.body().size(); i++) {
                     estados[i] = response.body().get(i).getNombreEstado();
                 }
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListaOfertasActivity.this);
                 builder.setTitle("Elija su ubicacion")
                         .setItems(estados, new DialogInterface.OnClickListener() {
@@ -122,6 +124,9 @@ public class ListaOfertasActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         });
+    }
+    private void createDialogoConSpiner(){
+
     }
 
 }
