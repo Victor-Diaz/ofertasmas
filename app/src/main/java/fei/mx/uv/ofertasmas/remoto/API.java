@@ -1,6 +1,8 @@
 package fei.mx.uv.ofertasmas.remoto;
 
 import android.content.Context;
+
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import fei.mx.uv.ofertasmas.model.Categoria;
@@ -23,7 +25,7 @@ public interface API {
     String BASE_URL = "http://192.168.1.64:9000/";
 
     @GET("api/Categorias")
-    Call<Categoria> getCategorias();
+    Call<List<Categoria>> getCategorias();
 
     @GET("api/Ciudades")
     Call<Ciudad> getCiudades();
@@ -35,7 +37,7 @@ public interface API {
     Call<Empresa> getEmpresas();
 
     @GET("api/estados")
-    Call<Estado> getEstados();
+    Call<List<Estado>> getEstados();
 
     @GET("api/Ofertas")
     Call<Oferta> getOfertas();
