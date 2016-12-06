@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 25
@@ -17,16 +18,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
-
+repositories {
+    maven { url "http://dl.bintray.com/pixplicity/maven" }
+    mavenCentral()
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
     testCompile 'junit:junit:4.12'
+    //-- Rest Related Libraries
     compile 'javax.annotation:javax.annotation-api:1.2'
     compile 'com.google.code.gson:gson:2.7'
     //----- Retrofit
@@ -34,4 +42,10 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:2.1.0"
     compile "com.squareup.retrofit2:adapter-rxjava:2.1.0"
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.0'
+    //--Butterknife
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    //--EasyPreferences
+    compile 'com.pixplicity.easyprefs:library:1.8.1@aar'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
