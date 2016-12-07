@@ -12,17 +12,21 @@
     tools:context="fei.mx.uv.ofertasmas.ListaOfertasActivity">
 
     <TextView
-        android:text="Selecciona categoria:"
+        android:text="@string/selecciona_categoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView2"
+        android:textSize="18sp" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner3" />
+        android:id="@+id/spinnerCategorias" />
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/lvOfertas"
+        android:layout_marginTop="15dp" />
+
 </LinearLayout>

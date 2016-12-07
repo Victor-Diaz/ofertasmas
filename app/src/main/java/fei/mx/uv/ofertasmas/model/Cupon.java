@@ -92,4 +92,8 @@ public class Cupon {
         this.idUsuario = idUsuario;
     }
 
+    @Override
+    public String toString() {
+        return codigoCupon;
+    }
 }

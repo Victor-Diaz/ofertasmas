@@ -12,8 +12,9 @@ class App : Application() {
         Prefs.Builder()
                 .setContext(this)
                 .setMode(ContextWrapper.MODE_PRIVATE)
-                .setPrefsName(packageName)
+                .setPrefsName("ofertas_mas")
                 .setUseDefaultSharedPreference(true)
                 .build()
     }
+
 }

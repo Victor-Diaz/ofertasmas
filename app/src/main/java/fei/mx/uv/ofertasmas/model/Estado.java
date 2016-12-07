@@ -47,5 +47,9 @@ public class Estado {
         this.nombreEstado = nombreEstado;
     }
 
+    @Override
+    public String toString() {
+        return nombreEstado;
+    }
 }
 

@@ -92,4 +92,8 @@ public class Usuario {
         this.celularUsuario = celularUsuario;
     }
 
+    @Override
+    public String toString() {
+        return nombreUsuario;
+    }
 }

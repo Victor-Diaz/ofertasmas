@@ -23,14 +23,15 @@
         android:text="Ingresa correo electrónico:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4" />
+        android:id="@+id/textView4"
+        android:layout_marginTop="20dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/edt_correo" />
+        android:id="@+id/edtCorreo" />
 
     <TextView
         android:text="Ingresa número teléfonico:"
@@ -43,7 +44,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/edt_telefono" />
+        android:id="@+id/edtTelefono" />
 
     <TextView
         android:text="Usuario:"
@@ -56,7 +57,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/edt_usuarrio" />
+        android:id="@+id/edtUsuarrio" />
 
     <TextView
         android:text="Ingresa contraseña:"
@@ -69,12 +70,11 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/edt_contrasena" />
+        android:id="@+id/edtContrasena" />
 
     <Button
         android:text="Registrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:onClick="registrar" />
+        android:id="@+id/btnRegistrar" />
 </LinearLayout>

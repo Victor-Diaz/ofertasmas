@@ -92,5 +92,9 @@ public class Empresa {
         this.telefonoEmpresa = telefonoEmpresa;
     }
 
+    @Override
+    public String toString() {
+        return nombreEmpresa;
+    }
 }
 

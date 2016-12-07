@@ -113,4 +113,9 @@ public class Oferta {
         this.idEmpresa = idEmpresa;
     }
 
+    @Override
+    public String toString() {
+        return nombreOferta;
+    }
+
 }

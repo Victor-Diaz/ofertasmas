@@ -16,31 +16,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView9"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textAlignment="center"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:fontFamily="sans-serif" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/edt_correo"
-        android:hint="Ingresa correo electrónico" />
+        android:id="@+id/edtCorreo"
+        android:hint="Ingresa correo electrónico"
+        android:layout_marginTop="20dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/edt_contrasena"
-        android:hint="Ingresa contraseña" />
+        android:id="@+id/edtContrasena"
+        android:hint="Ingresa contraseña"
+        android:layout_marginTop="10dp" />
 
     <Button
         android:text="Iniciar sesión"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button3" />
+        android:id="@+id/button3"
+        android:layout_marginTop="20dp" />
 
     <Space
         android:layout_width="match_parent"
@@ -55,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="registrar"
-        android:id="@+id/button4" />
+        android:id="@+id/button4"
+        android:layout_marginTop="10dp" />
 
 </LinearLayout>

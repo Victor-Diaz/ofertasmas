@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OfertasMas</string>
+    <string name="app_name">Ofertas Mas</string>
     <string name="title_activity_login">Inicio de sesión OfertasMas</string>
 
     <!-- Strings related to login -->
@@ -14,4 +14,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="selecciona_categoria">Selecciona categoria:</string>
+    <string name="nombre_lv_ofertas">Nombre</string>
+    <string name="descripcion_lv_ofertas">Descripcion</string>
+    <string name="config_de_local">Configuración de Localización</string>
+    <string name="guardar_config">Guardar</string>
+    <string name="selecciona_un_estado">Selecciona un Estado</string>
+    <string name="selecciona_una_ciudad">Selecciona una ciudad</string>
+    <string name="title_activity_test">testAct</string>
 </resources>

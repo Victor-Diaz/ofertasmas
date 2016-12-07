@@ -71,5 +71,10 @@ public class Ciudad {
         this.idEstado = idEstado;
     }
 
+    @Override
+    public String toString() {
+        return nombreCuidad;
+    }
+
 }
 
