@@ -46,4 +46,8 @@ dependencies {
     compile 'com.pixplicity.easyprefs:library:1.8.1@aar'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'com.android.support:recyclerview-v7:25.0.1'
+    //-- Barcode Android
+    compile ('com.bottlerocketstudios:barcode:1.0.3@aar') {
+        transitive = true;
+    }
 }
