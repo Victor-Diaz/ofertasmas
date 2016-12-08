@@ -3,6 +3,8 @@ package fei.mx.uv.ofertasmas
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -21,6 +23,8 @@ class OfertaActivity : AppCompatActivity() {
 
     private var oferta: SOferta? = null
     val OFERTA_STATUS = 1
+    val CONFIG_REQUEST = 2
+    val MIS_CUPONES_REQUEST = 3
 
     val tvNomOf by lazy { findViewById(R.id.tvNombreOferta) as TextView }
     val tvDescrOf by lazy { findViewById(R.id.tvDescripOfer) as TextView }
@@ -36,6 +40,32 @@ class OfertaActivity : AppCompatActivity() {
         oferta = intent.getSerializableExtra("oferta") as SOferta
         fillDataOferta(oferta as SOferta)
         btnGenCup.setOnClickListener { generarCupon() }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        //TODO Handle other options
+        when (item?.itemId) {
+            R.id.mConfig -> {
+                irAConfigActivity()
+                return true
+            }
+            R.id.mOfertas -> {
+                val intent = Intent(this@OfertaActivity, MisCuponesActivity::class.java)
+                startActivityForResult(intent, MIS_CUPONES_REQUEST)
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun irAConfigActivity() {
+        val intent = Intent(this@OfertaActivity, Configuacion::class.java)
+        startActivityForResult(intent, CONFIG_REQUEST)
     }
 
     private fun fillDataOferta(oferta: SOferta) {
@@ -94,7 +124,9 @@ class OfertaActivity : AppCompatActivity() {
     }
 
     private fun crearJson(correo: String): String {
-        val cupon = Cupon(0, Timestamp(Calendar.getInstance().time.time).toString(), oferta?.idOferta ?: 0, correo, 1)
+        val cupon = Cupon(0,
+                Timestamp(Calendar.getInstance().time.time).toString(),
+                oferta?.idOferta ?: 0, correo, 1)
         return Gson().toJson(cupon)
     }
 

@@ -22,7 +22,9 @@
         <activity android:name=".Registro" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".Configuacion" />
-        <activity android:name=".OfertaActivity"></activity>
+        <activity android:name=".OfertaActivity" />
+        <activity android:name=".CuponActivity" />
+        <activity android:name=".MisCuponesActivity"></activity>
     </application>
 
 </manifest>

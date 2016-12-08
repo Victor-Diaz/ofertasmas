@@ -1,5 +1,6 @@
 package fei.mx.uv.ofertasmas
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -19,7 +20,8 @@ import retrofit2.Response
 
 class ListaOfertasActivity : AppCompatActivity() {
 
-    val CONFIG_REQUEST = 1
+    val CONFIG_REQUEST = 2
+    val MIS_CUPONES_REQUEST = 3
 
     private val spinnerCategorias by lazy { findViewById(R.id.spinnerCategorias) as Spinner }
     private val lvOfertas by lazy { findViewById(R.id.lvOfertas) as ListView }
@@ -44,8 +46,22 @@ class ListaOfertasActivity : AppCompatActivity() {
                 irAConfigActivity()
                 return true
             }
+            R.id.mOfertas -> {
+                val intent = Intent(this@ListaOfertasActivity, MisCuponesActivity::class.java)
+                startActivityForResult(intent, MIS_CUPONES_REQUEST)
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CONFIG_REQUEST) {
+            getCategorias()
+            val (ciudad, idCiudad) = obtenerCiudadInfo()
+            val cat = spinnerCategorias.selectedItem as Categoria
+            getOfertas(idCiudad.toInt(), cat.idCategoria)
+        } // TODO handle regresar de mis cupones
     }
 
     private fun irAConfigActivity() {

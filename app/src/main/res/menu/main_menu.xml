@@ -3,6 +3,6 @@
 
     <item android:title="@string/configuracion_menu"
         android:id="@+id/mConfig" />
-    <item android:title="Mis Ofertas"
+    <item android:title="Mis Cupones"
         android:id="@+id/mOfertas" />
 </menu>

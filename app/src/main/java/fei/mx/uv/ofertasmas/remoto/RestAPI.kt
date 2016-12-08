@@ -34,6 +34,9 @@ interface RestAPI {
     @GET("api/cupones")
     fun cupones(): Call<Cupon>
 
+    @GET("api/cuponesPorUsuario/{correoUsuario}")
+    fun getCuponesPorUsuario(@Path("correoUsuario") correo: String) : Call<List<Cupon>>
+
     @POST("api/cupon")
     fun generarCupon(@Body cupon: RequestBody): Call<Mensaje>
 
@@ -48,6 +51,9 @@ interface RestAPI {
 
     @GET("api/ofertas")
     fun ofertas(): Call<Oferta>
+
+    @GET("api/oferta/{idOferta}")
+    fun ofertaPorId(@Path("idOferta") idOferta: Int) : Call<Oferta>
 
     @GET("api/ofertaPorCategoria/{nombreCategoria}")
     fun getOfertasPorCategoria(@Path("nombreCategoria") nombreCat: String): Call<List<Oferta>>

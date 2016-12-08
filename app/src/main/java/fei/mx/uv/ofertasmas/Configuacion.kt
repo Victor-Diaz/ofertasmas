@@ -39,7 +39,7 @@ class Configuacion : AppCompatActivity() {
         Prefs.putString("ciudad", (spnCiudades.selectedItem as Ciudad).nombreCuidad)
         Prefs.putString("idCiudad", (spnCiudades.selectedItem as Ciudad).idCiudad.toString())
         val intent = Intent()
-        setResult(1, intent)
+        setResult(2, intent)
         finish()
     }
 
