@@ -22,6 +22,7 @@
         <activity android:name=".Registro" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".Configuacion" />
+        <activity android:name=".OfertaActivity"></activity>
     </application>
 
 </manifest>

@@ -22,4 +22,5 @@
     <string name="selecciona_un_estado">Selecciona un Estado</string>
     <string name="selecciona_una_ciudad">Selecciona una ciudad</string>
     <string name="title_activity_test">testAct</string>
+    <string name="configuracion_menu">Configuracion</string>
 </resources>

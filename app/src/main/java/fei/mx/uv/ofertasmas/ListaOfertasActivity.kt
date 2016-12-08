@@ -3,12 +3,15 @@ package fei.mx.uv.ofertasmas
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import com.pixplicity.easyprefs.library.Prefs
 import fei.mx.uv.ofertasmas.model.Categoria
 import fei.mx.uv.ofertasmas.model.Oferta
+import fei.mx.uv.ofertasmas.model.SOferta
 import fei.mx.uv.ofertasmas.remoto.RestAPI
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,12 +32,32 @@ class ListaOfertasActivity : AppCompatActivity() {
         setListenerToSpinner()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        //TODO Handle other options
+        when (item?.itemId) {
+            R.id.mConfig -> {
+                irAConfigActivity()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun irAConfigActivity() {
+        val intent = Intent(this@ListaOfertasActivity, Configuacion::class.java)
+        startActivityForResult(intent, CONFIG_REQUEST)
+    }
+
     private fun obtenerCiudadInfo(): Pair<String, String> {
         val ciudad = Prefs.getString("ciudad", "not_set")
         val idCiudad = Prefs.getString("idCiudad", "not_set")
         if (ciudad == "not_set") {
-            val intent = Intent(this@ListaOfertasActivity, Configuacion::class.java)
-            startActivityForResult(intent, CONFIG_REQUEST)
+            irAConfigActivity()
             return Pair("not_set","not_set")
         } else {
             return Pair(ciudad, idCiudad)
@@ -67,8 +90,8 @@ class ListaOfertasActivity : AppCompatActivity() {
         spinnerCategorias.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cat = spinnerCategorias.getItemAtPosition(p2) as Categoria
-                val idCiudad = Prefs.getString("idCiudad", "not_set")
-                if (idCiudad != "not_set") getOfertas(idCiudad.toInt(), cat.idCategoria)
+                val (ciudad, idCiudad) = obtenerCiudadInfo()
+                getOfertas(idCiudad.toInt(), cat.idCategoria)
             }
             override fun onNothingSelected(p0: AdapterView<*>?) { }
         }
@@ -94,6 +117,17 @@ class ListaOfertasActivity : AppCompatActivity() {
                 android.R.layout.simple_list_item_1,
                 ofertas)
         lvOfertas.adapter = adapter
+        addListenerToLV()
+    }
+
+    private fun addListenerToLV() {
+        lvOfertas.setOnItemClickListener { adapterView, view, i, l ->
+            val o = lvOfertas.getItemAtPosition(i) as Oferta
+            val sOferta = SOferta(o.idOferta, o.nombreOferta, o.descripcionOferta, o.precioArticulo, o.idEmpresa)
+            val intent = Intent(this@ListaOfertasActivity, OfertaActivity::class.java)
+            intent.putExtra("oferta", sOferta)
+            startActivity(intent)
+        }
     }
 
 }

@@ -34,8 +34,14 @@ interface RestAPI {
     @GET("api/cupones")
     fun cupones(): Call<Cupon>
 
+    @POST("api/cupon")
+    fun generarCupon(@Body cupon: RequestBody): Call<Mensaje>
+
     @GET("api/empresas")
     fun empresas(): Call<Empresa>
+
+    @GET("api/empresa/{idEmpresa}")
+    fun empresaPorId(@Path("idEmpresa") idEmpresa: Int) : Call<Empresa>
 
     @GET("api/estados")
     fun estados(): Call<List<Estado>>
@@ -59,6 +65,11 @@ interface RestAPI {
     @POST("api/usuario")
     fun registrarUsuario(@Body usuario: RequestBody): Call<Mensaje>
 
+    @FormUrlEncoded
+    @POST("api/login")
+    fun login(@Field("correo") correo: String,
+              @Field("contrasena") contrasena: String) : Call<Mensaje>
+
     object Factory {
         fun getIstance(context: Context): RestAPI {
             val service: RestAPI
@@ -81,7 +92,7 @@ interface RestAPI {
     }
 
     companion object {
-        val BASE_URL = "http://192.168.1.69:9000/"
+        val BASE_URL = "http://10.0.2.2:9000/"
     }
 
 

@@ -18,6 +18,7 @@ class Configuacion : AppCompatActivity() {
     val spnEstados by lazy { findViewById(R.id.spnEstados) as Spinner }
     val spnCiudades by lazy { findViewById(R.id.spnCiudades) as Spinner }
     val btnGuardar by lazy { findViewById(R.id.btnGuardarConfig) as Button }
+    val btnLogOut by lazy { findViewById(R.id.btnLogOut) as Button }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,13 @@ class Configuacion : AppCompatActivity() {
         getEstados()
         setListenerToSpinner()
         btnGuardar.setOnClickListener { guardarConfig() }
+        btnLogOut.setOnClickListener { logOut() }
+    }
+
+    private fun logOut() {
+        Prefs.putString("correoUsuario", "not_set")
+        setResult(1, Intent())
+        finish()
     }
 
     private fun guardarConfig() {

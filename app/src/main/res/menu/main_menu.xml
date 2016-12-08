@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/configuracion_menu"
+        android:id="@+id/mConfig" />
+    <item android:title="Mis Ofertas"
+        android:id="@+id/mOfertas" />
+</menu>

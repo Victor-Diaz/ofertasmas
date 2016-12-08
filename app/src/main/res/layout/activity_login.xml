@@ -12,13 +12,12 @@
     tools:context="fei.mx.uv.ofertasmas.LoginActivity">
 
     <TextView
-        android:text="Registro de usuarios Ofertasmas"
+        android:text="Login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView9"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textAlignment="center"
-        android:textStyle="normal|bold"
         android:fontFamily="sans-serif" />
 
     <EditText
@@ -43,7 +42,7 @@
         android:text="Iniciar sesión"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button3"
+        android:id="@+id/btnLogin"
         android:layout_marginTop="20dp" />
 
     <Space
@@ -59,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="registrar"
-        android:id="@+id/button4"
+        android:id="@+id/btnRegUsuario"
         android:layout_marginTop="10dp" />
 
 </LinearLayout>

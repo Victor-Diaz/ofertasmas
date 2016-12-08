@@ -58,9 +58,10 @@ class Registro : AppCompatActivity() {
         call.enqueue(object : Callback<Mensaje> {
             override fun onResponse(call: Call<Mensaje>, response: Response<Mensaje>) {
                 if (!response.body().error) {
+                    //TODO hacer finish
                     Toast.makeText(this@Registro, response.body().mensaje, Toast.LENGTH_LONG).show()
-                    val intent = Intent(this@Registro, LoginActivity::class.java)
-                    startActivity(intent)
+                    setResult(1, Intent())
+                    finish()
                 }
                 else
                     Toast.makeText(this@Registro, response.body().mensaje, Toast.LENGTH_LONG).show()

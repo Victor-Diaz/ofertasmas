@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView"
         android:textSize="24sp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent" />
 
     <TextView
         android:text="@string/selecciona_un_estado"
@@ -53,4 +54,21 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnGuardarConfig"
         android:layout_marginTop="20dp" />
+
+    <TextView
+        android:text="Cuenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView14"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorAccent" />
+
+    <Button
+        android:text="BORRAR DATOS (LOG OUT)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLogOut"
+        android:layout_marginTop="15dp" />
 </LinearLayout>
