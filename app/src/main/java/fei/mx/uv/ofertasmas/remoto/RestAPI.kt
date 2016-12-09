@@ -98,7 +98,7 @@ interface RestAPI {
     }
 
     companion object {
-        val BASE_URL = "http://10.0.2.2:9000/"
+        val BASE_URL = "http://104.130.23.86:9000/"
     }
 
 

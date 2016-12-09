@@ -40,7 +40,6 @@ class ListaOfertasActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        //TODO Handle other options
         when (item?.itemId) {
             R.id.mConfig -> {
                 irAConfigActivity()
@@ -59,9 +58,11 @@ class ListaOfertasActivity : AppCompatActivity() {
         if (requestCode == CONFIG_REQUEST) {
             getCategorias()
             val (ciudad, idCiudad) = obtenerCiudadInfo()
-            val cat = spinnerCategorias.selectedItem as Categoria
-            getOfertas(idCiudad.toInt(), cat.idCategoria)
-        } // TODO handle regresar de mis cupones
+            if (spinnerCategorias.selectedItem != null) {
+                val cat = spinnerCategorias.selectedItem as Categoria
+                getOfertas(idCiudad.toInt(), cat.idCategoria)
+            }
+        }
     }
 
     private fun irAConfigActivity() {

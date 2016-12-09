@@ -114,6 +114,8 @@ class OfertaActivity : AppCompatActivity() {
                 //TODO ir a actividad de Cupones
                 if (!res.error) {
                     Toast.makeText(this@OfertaActivity, res.mensaje, Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@OfertaActivity, MisCuponesActivity::class.java)
+                    startActivityForResult(intent, MIS_CUPONES_REQUEST)
                 }
                 else  Toast.makeText(this@OfertaActivity, res.mensaje, Toast.LENGTH_LONG).show()
             }
