@@ -1,6 +1,5 @@
 package fei.mx.uv.ofertasmas
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -19,6 +18,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ListaOfertasActivity : AppCompatActivity() {
+
+    //TODO implement a refresh mechanism
 
     val CONFIG_REQUEST = 2
     val MIS_CUPONES_REQUEST = 3
@@ -57,12 +58,20 @@ class ListaOfertasActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CONFIG_REQUEST) {
             getCategorias()
-            val (ciudad, idCiudad) = obtenerCiudadInfo()
-            if (spinnerCategorias.selectedItem != null) {
-                val cat = spinnerCategorias.selectedItem as Categoria
-                getOfertas(idCiudad.toInt(), cat.idCategoria)
+            if (prefsValidas()) {
+                val (ciudad, idCiudad) = obtenerCiudadInfo()
+                if (spinnerCategorias.selectedItem != null) {
+                    val cat = spinnerCategorias.selectedItem as Categoria
+                    getOfertas(idCiudad.toInt(), cat.idCategoria)
+                }
             }
         }
+    }
+
+    private fun prefsValidas(): Boolean {
+        val (ciudad, idCiudad) = obtenerCiudadInfo()
+        val esCiudad = ciudad != "not_set"
+        return esCiudad
     }
 
     private fun irAConfigActivity() {

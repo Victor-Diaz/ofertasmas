@@ -31,24 +31,34 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        val correo = edtCorreo.text.toString()
-        val password = edtPassword.text.toString()
-        val call = RestAPI.Factory.getIstance(this@LoginActivity).login(correo, password)
-        call.enqueue( object : Callback<Mensaje> {
-            override fun onResponse(call: Call<Mensaje>?, response: Response<Mensaje>?) {
-                val mensaje = response?.body() ?: Mensaje()
-                if (!mensaje.error) {
-                    Toast.makeText(this@LoginActivity, mensaje.mensaje, Toast.LENGTH_LONG).show()
-                    Prefs.putString("correoUsuario", correo)
-                    setResult(1, Intent())
-                    finish()
+        if (valido()) {
+            val correo = edtCorreo.text.toString()
+            val password = edtPassword.text.toString()
+            val call = RestAPI.Factory.getIstance(this@LoginActivity).login(correo, password)
+            call.enqueue(object : Callback<Mensaje> {
+                override fun onResponse(call: Call<Mensaje>?, response: Response<Mensaje>?) {
+                    val mensaje = response?.body() ?: Mensaje()
+                    if (!mensaje.error) {
+                        Toast.makeText(this@LoginActivity, mensaje.mensaje, Toast.LENGTH_LONG).show()
+                        Prefs.putString("correoUsuario", correo)
+                        setResult(1, Intent())
+                        finish()
+                    } else Toast.makeText(this@LoginActivity, mensaje.mensaje, Toast.LENGTH_LONG).show()
                 }
-                else  Toast.makeText(this@LoginActivity, mensaje.mensaje, Toast.LENGTH_LONG).show()
-            }
-            override fun onFailure(call: Call<Mensaje>?, t: Throwable?) {
-                Toast.makeText(this@LoginActivity, t?.message, Toast.LENGTH_LONG).show()
-            }
-        })
+
+                override fun onFailure(call: Call<Mensaje>?, t: Throwable?) {
+                    Toast.makeText(this@LoginActivity, t?.message, Toast.LENGTH_LONG).show()
+                }
+            })
+        }
+    }
+
+    private fun valido(): Boolean {
+        val correo = edtCorreo.text.isNullOrEmpty()
+        if (correo) edtCorreo.error = "Campo obligatorio"
+        val password = edtPassword.text.isNullOrEmpty()
+        if (password) edtPassword.error = "Campo obligatorio"
+        return !(correo || password)
     }
 
     private fun irRegistro() {

@@ -32,9 +32,13 @@ class Registro : AppCompatActivity() {
 
     fun esValido(): Boolean {
         val correo = edtCorreo.text.isNullOrEmpty()
+        if (correo) edtCorreo.error = "Este campo es obligatorio"
         val telefono = edtTelefono.text.isNullOrEmpty()
+        if (telefono) edtTelefono.error = "Este campo es obligatorio"
         val usuario = edtUsuario.text.isNullOrEmpty()
+        if (usuario) edtUsuario.error = "Este campo es obligatorio"
         val contrasena = edtContrasena.text.isNullOrEmpty()
+        if (contrasena) edtContrasena.error = "Este campo es obligatorio"
         return !(correo || telefono || usuario || contrasena)
     }
 

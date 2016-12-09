@@ -36,11 +36,22 @@ class Configuacion : AppCompatActivity() {
     }
 
     private fun guardarConfig() {
-        Prefs.putString("ciudad", (spnCiudades.selectedItem as Ciudad).nombreCuidad)
-        Prefs.putString("idCiudad", (spnCiudades.selectedItem as Ciudad).idCiudad.toString())
-        val intent = Intent()
-        setResult(2, intent)
-        finish()
+        if (validarSpinners()) {
+            Prefs.putString("ciudad", (spnCiudades.selectedItem as Ciudad).nombreCuidad)
+            Prefs.putString("idCiudad", (spnCiudades.selectedItem as Ciudad).idCiudad.toString())
+            val intent = Intent()
+            setResult(2, intent)
+            finish()
+        } else {
+            Toast.makeText(this@Configuacion, "Verifique su conexión a Internet", Toast.LENGTH_LONG).show()
+            Prefs.putString("ciudad", "not_set")
+            Prefs.putString("idCiudad", "not_set")
+        }
+    }
+
+    private fun validarSpinners(): Boolean {
+        val ciudadIsNull = spnCiudades.selectedItem == null
+        return !ciudadIsNull
     }
 
     private fun getEstados() {
