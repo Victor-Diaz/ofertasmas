@@ -48,7 +48,6 @@ class OfertaActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        //TODO Handle other options
         when (item?.itemId) {
             R.id.mConfig -> {
                 irAConfigActivity()
@@ -57,6 +56,9 @@ class OfertaActivity : AppCompatActivity() {
             R.id.mOfertas -> {
                 val intent = Intent(this@OfertaActivity, MisCuponesActivity::class.java)
                 startActivityForResult(intent, MIS_CUPONES_REQUEST)
+                return true
+            }
+            R.id.mRefresh -> {
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
@@ -111,7 +113,6 @@ class OfertaActivity : AppCompatActivity() {
         call.enqueue( object : Callback<Mensaje> {
             override fun onResponse(call: Call<Mensaje>?, response: Response<Mensaje>) {
                 val res = response.body()
-                //TODO ir a actividad de Cupones
                 if (!res.error) {
                     Toast.makeText(this@OfertaActivity, res.mensaje, Toast.LENGTH_LONG).show()
                     val intent = Intent(this@OfertaActivity, MisCuponesActivity::class.java)

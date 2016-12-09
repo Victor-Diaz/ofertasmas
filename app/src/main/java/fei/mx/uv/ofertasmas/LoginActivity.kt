@@ -62,7 +62,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun irRegistro() {
-        //TODO hacer onResult
         val intent = Intent(this@LoginActivity, Registro::class.java)
         startActivityForResult(intent, LOGIN_STATUS)
     }

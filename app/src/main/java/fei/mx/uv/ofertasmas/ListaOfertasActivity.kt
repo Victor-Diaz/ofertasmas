@@ -30,9 +30,13 @@ class ListaOfertasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_ofertas)
+        initialize()
+        setListenerToSpinner()
+    }
+
+    private fun initialize() {
         obtenerCiudadInfo()
         getCategorias()
-        setListenerToSpinner()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -49,6 +53,10 @@ class ListaOfertasActivity : AppCompatActivity() {
             R.id.mOfertas -> {
                 val intent = Intent(this@ListaOfertasActivity, MisCuponesActivity::class.java)
                 startActivityForResult(intent, MIS_CUPONES_REQUEST)
+                return true
+            }
+            R.id.mRefresh -> {
+                initialize()
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

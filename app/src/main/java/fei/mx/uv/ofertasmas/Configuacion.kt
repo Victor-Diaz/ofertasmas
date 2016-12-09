@@ -3,6 +3,8 @@ package fei.mx.uv.ofertasmas
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import com.pixplicity.easyprefs.library.Prefs
@@ -23,10 +25,29 @@ class Configuacion : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_configuacion)
-        getEstados()
-        setListenerToSpinner()
+        initialize()
         btnGuardar.setOnClickListener { guardarConfig() }
         btnLogOut.setOnClickListener { logOut() }
+    }
+
+    private fun initialize() {
+        getEstados()
+        setListenerToSpinner()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.config_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.mConfigRefresh -> {
+                initialize()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 
     private fun logOut() {
